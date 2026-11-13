@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router'
 import "./FarmHeader.css"
 import PlusIcon from "../icons/PlusIcon"
 import FarmIcon from '../icons/FarmIcon'
+import ToggleDarkMode from "./ToggleDarkMode.jsx"
 
 const FarmHeader = () => {
   /*
@@ -39,6 +40,8 @@ try { localStorage.setItem("theme", next); } catch {}
               <PlusIcon />
               Add post
             </NavLink>
+
+            <ToggleDarkMode/>
           </nav>
         </div>
       </header>

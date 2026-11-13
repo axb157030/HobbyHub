@@ -1,0 +1,33 @@
+
+
+
+
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.theme-icon {
+  grid-area: 1 / 1;   /* both icons share the same cell */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.is-hidden {
+  opacity: 0;
+  transform: translateY(20%) rotate(100deg);
+  pointer-events: none;
+}
+
+
+/*Thank you, https://dev.to/murtuzaalisurti/dark-mode-toggle-animation-using-css-27il */

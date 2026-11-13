@@ -73,7 +73,8 @@
 
 .navbar-link.navbar-cta:hover {
   background: var(--accent);
-  color: var(--link-color-active);
+  color: var(--link-color-active)
+  
 
 }
 
@@ -93,9 +94,15 @@
   align-items: center;
   gap: 0.2rem;
   padding: 0.25rem;
+  padding-right: 1rem;
   background: var(--pill-bg);
   border: 1px solid var(--line);
   border-radius: 999px;
+}
+
+.navbar-links .theme-toggle {
+  margin-left: 0.6rem;
+  margin-right: 0.5rem;
 }
 
 .navbar-link {
