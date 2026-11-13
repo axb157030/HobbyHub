@@ -1,0 +1,171 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.7rem 1.5rem;
+}
+
+/* ---------- Brand ---------- */
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 12px;
+}
+
+.navbar-mark {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(55, 99, 72, 0.12);
+  transition: transform 0.25s ease;
+}
+
+.navbar-brand:hover .navbar-mark {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.navbar-brand-text strong {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+
+.navbar-cta {
+  color: var(--accent);
+}
+
+
+
+
+.navbar-link.navbar-cta.active {
+  background: var(--accent);
+  color: var(--link-color-active);
+}
+
+.navbar-link.navbar-cta:hover {
+  background: var(--accent);
+  color: var(--link-color-active);
+
+}
+
+.navbar-brand-text small {
+  margin-top: 0.2rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Links (segmented pill track) ---------- */
+
+.navbar-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  background: var(--pill-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.navbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--link-color);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: var(--link-color-hover);
+  background: var(--link-bg-hover);
+}
+
+/* Current page: Dashboard fills green */
+.navbar-link.active {
+  background: var(--link-bg-active);
+  color: var(--link-color-active);
+}
+
+
+
+
+
+/* ---------- Keyboard focus ---------- */
+
+.navbar-brand:focus-visible,
+.navbar-link:focus-visible {
+  outline: 2px solid var(--accent-bg);
+  outline-offset: 2px;
+}
+/* ---------- Small screens ---------- */
+
+@media (max-width: 520px) {
+  .navbar-inner {
+    padding: 0.6rem 1rem;
+  }
+
+  .navbar-brand-text small {
+    display: none;
+  }
+
+  .navbar-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Very narrow phones: keep the mark, drop the brand name so the links fit */
+  .navbar-brand-text {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-mark,
+  .navbar-link {
+    transition: none;
+  }
+
+  .navbar-brand:hover .navbar-mark {
+    transform: none;
+  }
+}
+/*Thank you https://github.com/axb157030/Crewmates/blob/main/src/components/Navbar.css */

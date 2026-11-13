@@ -1,0 +1,93 @@
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router'
+import FarmBlogForm from './FarmBlogForm.jsx'
+import { getPostById, updatePost } from '../utils/supabase_queries.js'
+
+const EditFarmBlog = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [postResult, setPostResult] = useState({
+    id: null,
+    post: null,
+    error: '',
+  })
+
+  // Load the saved post first; the form below starts with its current values.
+  useEffect(() => {
+    let isCurrent = true
+
+    getPostById(id).then(({ data, error }) => {
+      if (!isCurrent) return
+
+      setPostResult({
+        id,
+        post: data,
+        error: error?.message ?? (data ? '' : 'Post not found.'),
+      })
+    })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [id])
+
+  const isLoading = postResult.id !== id
+  const post = isLoading ? null : postResult.post
+  const loadError = isLoading ? '' : postResult.error
+
+  const handleSave = async (values) => {
+    const result = await updatePost(
+      id,
+      values.title,
+      values.content,
+      values.imageUrl,
+      values.flag,
+      values.videoUrl,
+    )
+
+    if (result.error || !result.data) {
+      return {
+        error:
+          result.error ?? new Error('The updated post was not returned.'),
+      }
+    }
+
+    navigate(`/farm-blog/${id}`)
+    return { error: null }
+  }
+
+  if (isLoading) {
+    return (
+      <main className="farm-blog-page">
+        <p role="status">Loading post…</p>
+      </main>
+    )
+  }
+
+  if (loadError || !post) {
+    return (
+      <main className="farm-blog-page">
+        <section className="farm-blog-card">
+          <p className="farm-blog-alert" role="alert">
+            {loadError || 'Post not found.'}
+          </p>
+          <Link className="farm-blog-button farm-blog-button--secondary" to="/farm-blog">
+            Back to the feed
+          </Link>
+        </section>
+      </main>
+    )
+  }
+
+  return (
+    <FarmBlogForm
+      key={post.id}
+      mode="edit"
+      post={post}
+      onSave={handleSave}
+      cancelTo={`/farm-blog/${id}`}
+    />
+  )
+}
+
+export default EditFarmBlog

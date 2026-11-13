@@ -1,0 +1,106 @@
+:root {
+
+  color-scheme: light dark;
+  /*                  day (yours)   night (farm after dark) */
+  --primary: light-dark(#3F6B3A, #8DBF7F);
+  /* pasture green → moonlit sage */
+  --primary-dark: light-dark(#2C4F29, #B4D8A8);
+  /* hover/pressed, lighter at night */
+  --accent: light-dark(#D9A441, #F0BE5A);
+  --accent-bg: light-dark(rgba(47, 107, 58, 0.10), rgba(127, 207, 138, 0.14));
+  --accent-border: light-dark(rgba(47, 107, 58, 0.50), rgba(127, 207, 138, 0.50));
+  --bg: light-dark(#FAF6EC, #1A1712);
+  /* cream → dark soil */
+  --surface: light-dark(#FFFFFF, #26221A);
+  /* cards: barn-wood brown */
+  --text: light-dark(#2B2118, #F0E8D6);
+  /* warm cream, not pure white */
+  --text-h: light-dark(#08060d, #F0E8D6);
+  /* warm cream, not pure white */
+  --border: light-dark(#E5E4E7, #3A3229);
+  /* light gray → dark soil */
+  --code-bg: light-dark(#F4F3EC, #2A241B);
+  /* light cream → dark soil */
+  --navbar-bg: light-dark(#f4f4ede0, #1b1e18e0);
+  --link-color: light-dark(#5b6456, #a3aa9d);
+  /* resting, muted */
+  --link-color-hover: light-dark(#1d2419, #e8ece3);
+  /* same as --ink */
+  --link-color-active: #e5ebe7;
+  /* distinct from --brand-color */
+  --link-bg-hover: light-dark(#2f6b3a14, #7fcf8a1f);
+  --link-bg-active: light-dark(#2f6b3a, #7fcf8a);
+  --pill-bg: light-dark(#ffffff, #232820);
+  --pill-border: light-dark(#dfe3d8, #3a4136);
+  --line: light-dark(#dfe3d8, #3a4136);
+  --brand-color: light-dark(#2f6b3a, #7fcf8a);
+  --muted: light-dark(#8A7B6A, #A89A85);
+  --danger: light-dark(#B3392F, #E57A6E);
+  /* barn red, softened */
+  --repost: light-dark(#4A7FA7, #86B6DA);
+  /* creek blue */
+  --ink: light-dark(#1d2419, #e8ece3);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#theme-toggle .icon-night {
+  display: none;
+}
+
+:root[data-theme="dark"] #theme-toggle .icon-day {
+  display: none;
+}
+
+:root[data-theme="dark"] #theme-toggle .icon-night {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) #theme-toggle .icon-day {
+    display: none;
+  }
+
+  :root:not([data-theme]) #theme-toggle .icon-night {
+    display: inline;
+  }
+}
+
+/*.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+} */
