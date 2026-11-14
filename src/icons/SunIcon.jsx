@@ -14,3 +14,5 @@ const SunIcon = ({ className }) => (
   </svg>
 );
 export default SunIcon;
+
+// Thank you https://www.freecodecamp.org/news/how-to-handle-dark-mode-with-css-and-javascript/

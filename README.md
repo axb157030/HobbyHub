@@ -65,7 +65,7 @@ The following **additional** features are implemented:
 
 ## Supabase setup
 
-Copy `.env.example` to `.env.local` and fill in the project's URL and anon/publishable key. Enable anonymous sign-ins in Supabase Authentication settings, then run `supabase/setup.sql` in the SQL Editor. The SQL does not convert an existing `posts.id` column from `bigint`; migrate or recreate that table separately if it uses bigint IDs.
+The SQL does not convert an existing `posts.id` column from `bigint`; migrate or recreate that table separately if it uses bigint IDs.
 
 The Supabase query helpers sign visitors in anonymously before writes and voting—there is no password or author-ID prompt. Supabase keeps that identity in the browser so RLS can restrict edits, deletes, and one vote per post. Clearing browser storage loses access to posts and comments created by that anonymous identity; a new browser identity can vote again. Existing `upvotes_count` values are retained when adding vote tracking, but older votes cannot be attributed to users or removed through the new toggle. The create, edit, and detail routes use these helpers; the feed and comments UI still need to be connected.
 

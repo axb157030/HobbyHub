@@ -7,11 +7,19 @@
     - Simple ul list of links. Maybe should get removed.
 
 - **FeedControls** holds feed-wide controls: search by title, sort by newest or most upvoted, and choose compact or expanded posts.
+    - Shows the search, sort, and filter controls and reports changes through props.
     - Always available on the feed: keep it inside FarmFeed, above the posts. Make it sticky if you want it to stay visible while scrolling.
     - Add the search bar: searching posts by creation time
     upvotes count, and "flag" in both ascending and descending order but default is descending order by creation date. feature in your README, so it’s part of the project checklist, not just an extra.
 
 - **FarmFeed** receives a list of posts and displays them. It shouldn’t decide how to fetch them. Users can sort by creation date and upvote count as well as filter by post title and flag like "Question" or "Opinion".
+
+    - Should render <FeedControls />, but they should have separate jobs
+    - FarmFeed receives posts, applies those choices, and displays the matching posts.
+        A parent page or route fetches the posts and passes them to FarmFeed.
+        So FarmFeed can decide how to display the posts, but not how to fetch them.
+
+
 
 - **AddFarmBlog** Adds a post. `Users can set flags such as "Question" or "Opinion" while creating a post`. User does not add the author. Supabase anonymous sign-in assigns a persistent browser identity in the background; no password or author-ID prompt is required. Users must add the title. It is mandatory. Form will not submit without the post title. Users can add a flag that from a list of predetermined options, provide a video link. Upvotes are 0 upon addition. Users cannot change upvote number. Users cannot add comments. Creation Date is made automatically.
 

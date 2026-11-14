@@ -5,3 +5,5 @@ const MoonIcon = ({ className }) => (
   </svg>
 );
 export default MoonIcon;
+
+// Thank you https://www.freecodecamp.org/news/how-to-handle-dark-mode-with-css-and-javascript/

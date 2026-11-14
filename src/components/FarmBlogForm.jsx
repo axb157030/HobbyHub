@@ -13,6 +13,10 @@ const getValues = (post) => ({
   repostId: post?.repost_id ?? '',
 })
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const isUuid = (value) => UUID_RE.test(value);
+// Thank you Claude.
+
 const formatDate = (value) => {
   if (!value) return ''
 
@@ -163,6 +167,7 @@ const FarmBlogForm = ({
   const [isSaving, setIsSaving] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [titleError, setTitleError] = useState('')
+  const [repostIdError, setRepostIdError] = useState('')
   const isViewing = mode === 'view'
 
   const updateValue = (field, value) => {
@@ -173,12 +178,16 @@ const FarmBlogForm = ({
     event.preventDefault()
     setErrorMessage('')
     setTitleError('')
+    setRepostIdError('')
 
     // Catch blank-looking titles here so the user gets a clear message before saving.
     const title = values.title.trim()
     if (!title) {
       setTitleError('A title is required.')
       return
+    }
+    if (!isUuid(values.repostId.trim())) {
+      setRepostIdError('Repost must be in data type of uuid')
     }
 
     setIsSaving(true)
@@ -396,7 +405,9 @@ const FarmBlogForm = ({
             >
               <option value="">No topic</option>
               <option value="Question">Question</option>
-              <option value="Opinion">Opinion</option>
+              <option value="Opinion">Opinion</option>s
+              <option value="Insight">Insight</option>
+              <option value="Fact">Fact</option>
             </select>
           </div>
 
@@ -428,6 +439,15 @@ const FarmBlogForm = ({
                 onChange={(event) => updateValue('repostId', event.target.value)}
                 placeholder="Paste the original post ID"
               />
+
+              {repostIdError && (
+                <span
+                  className="farm-blog-field-error"
+                  id="farm-blog-title-error"
+                >
+                  {repostIdError}
+                </span>
+              )}
             </div>
           )}
 

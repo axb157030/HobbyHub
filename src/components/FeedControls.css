@@ -1,0 +1,67 @@
+.feed-controls {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #fbf8f1;
+  border: 1px solid #e3dccb;
+  border-radius: 12px;
+}
+
+.feed-controls__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.feed-controls__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.feed-controls__field--grow {
+  flex: 1 1 220px;
+}
+
+.feed-controls label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7a725d;
+}
+
+.feed-controls input,
+.feed-controls select {
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  color: #2e2a1f;
+  background: #fff;
+  border: 1px solid #e3dccb;
+  border-radius: 8px;
+}
+
+.feed-controls input:focus-visible,
+.feed-controls select:focus-visible {
+  outline: 3px solid #5b8c3a;
+  outline-offset: 1px;
+}
+
+.feed-controls__reset {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: #3f6b22;
+  background: #e6f0dc;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.feed-controls__reset:hover {
+  background: #d6e7c7;
+}
+
+.feed-controls__count {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: #7a725d;
+}
