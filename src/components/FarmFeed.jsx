@@ -37,7 +37,7 @@ const FarmFeed = () => {
     };
   }, []);
 
-  // Plain derived value: recomputed each render, no effect, no memo
+  // Derive visible posts from the source list and controls so duplicate state cannot go stale.
   const visiblePosts = applyFilters(posts, filters);
 
   return (
@@ -77,8 +77,8 @@ const FarmFeed = () => {
       {!loading && !error && visiblePosts.length > 0 && (
         <div className="farm-feed__grid">
           {visiblePosts.map((post) => (
-            <Link to={`/farm-blog/${post.id}`}>
-              <FarmBlogCard key={post.id} post={post} />
+            <Link key={post.id} to={`/farm-blog/${post.id}`}>
+              <FarmBlogCard post={post} />
               </Link>
           ))}
         </div>

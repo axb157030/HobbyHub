@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
 import FarmBlogForm from './FarmBlogForm.jsx'
-import { deletePost, getPostById } from '../utils/supabase_queries.js'
+import CommentSection from './CommentSection.jsx'
+import { deletePost, getPostById, checkAuthorOfPostSameAsOneLoggedIn } from '../utils/supabase_queries.js'
 
 const FarmBlogDetails = () => {
   const { id } = useParams()
@@ -36,7 +37,14 @@ const FarmBlogDetails = () => {
   const loadError = isLoading ? '' : postResult.error
 
   const handleDelete = async () => {
-    // Supabase RLS decides whether this browser identity owns the post.
+    // Check here for a friendly message; RLS still enforces ownership in the database.
+const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
+
+  if (isRealAuthor.error) return { error: isRealAuthor.error }
+
+  if (!isRealAuthor.data) {
+    return { error: new Error('Only the author of the post can delete the post') }
+  }
     const result = await deletePost(id)
 
     if (result.error) return result
@@ -70,12 +78,18 @@ const FarmBlogDetails = () => {
   }
 
   return (
+    <>
+    {/* Keep comments on the post page and pass the ID so they load for this post only. */}
     <FarmBlogForm
       key={post.id}
       mode="view"
       post={post}
       onDelete={handleDelete}
     />
+    <br />
+    <CommentSection postId={id}/>
+    </>
+
   )
 }
 

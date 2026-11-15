@@ -5,6 +5,13 @@ const getSessionError = async () => {
   return error
 }
 
+// Anonymous sign-in gives this browser a stable ID for ownership; it is not a full account.
+const getCurrentUserId = async () => {
+  const { data: session, error } = await ensureAnonymousSession()
+  return { data: session?.user?.id ?? null, error }
+}
+
+// Keep database requests here so components can focus on showing data and handling clicks.
 const getPublicFeed = async () => {
   const { data, error } = await supabase
     .from('posts')
@@ -112,6 +119,34 @@ const updatePost = async (
   return { data, error }
 }
 
+const checkAuthorOfPostSameAsOneLoggedIn = async (postId) => {
+  const { data: session, error: sessionError } = await ensureAnonymousSession()
+  if (sessionError) return { data: null, error: sessionError }
+
+  const { data, error } = await supabase
+    .from('posts')
+    .select('id')
+    .eq('id', postId)
+    .eq('author_id', session.user.id)
+    .maybeSingle()
+
+  return { data: Boolean(data), error }
+}
+
+const checkAuthorOfCommentSameAsOneLoggedIn = async (commentId) => {
+  const { data: session, error: sessionError } = await ensureAnonymousSession()
+  if (sessionError) return { data: null, error: sessionError }
+
+  const { data, error } = await supabase
+    .from('comments')
+    .select('id')
+    .eq('id', commentId)
+    .eq('author_id', session.user.id)
+    .maybeSingle()
+
+  return { data: Boolean(data), error }
+}
+
 const deletePost = async (postId) => {
   const sessionError = await getSessionError()
   if (sessionError) return { data: null, error: sessionError }
@@ -137,10 +172,16 @@ const togglePostUpvote = async (postId) => {
   return { data, error }
 }
 
+const getUpvoteCount = async (postId) => {
+  const {data, error} = await supabase.from('posts').select('upvotes_count').eq('id', postId).single()
+
+  return {data, error}
+}
+
 const getComments = async (postId) => {
   const { data, error } = await supabase
     .from('comments')
-    .select('id, post_id, content, created_at, updated_at')
+    .select('id, post_id, content, created_at, author_id, updated_at')
     .eq('post_id', postId)
     .order('created_at', { ascending: true })
 
@@ -151,6 +192,7 @@ const createComment = async (postId, content) => {
   const sessionError = await getSessionError()
   if (sessionError) return { data: null, error: sessionError }
 
+  // The database fills author_id from the session, so the client never chooses the owner.
   const { data, error } = await supabase
     .from('comments')
     .insert({ post_id: postId, content })
@@ -160,6 +202,23 @@ const createComment = async (postId, content) => {
   return { data, error }
 }
 
+const updateComment = async (
+  commentId,
+  content
+) => {
+  const sessionError = await getSessionError()
+  if (sessionError) return { data: null, error: sessionError }
+
+  // RLS checks ownership on the server; hiding an Edit button is not a security boundary.
+  const { data, error } = await supabase
+    .from('comments')
+    .update({ content })
+    .eq('id', commentId)
+    .select('id, content, author_id, updated_at')
+    .single()
+
+  return { data, error }
+}
 const deleteComment = async (commentId) => {
   const sessionError = await getSessionError()
   if (sessionError) return { data: null, error: sessionError }
@@ -175,14 +234,19 @@ const deleteComment = async (commentId) => {
 }
 
 export {
+  getCurrentUserId,
   getPublicFeed,
   getPostById,
   getPostUpvoteStatus,
   createPost,
   updatePost,
   deletePost,
+  checkAuthorOfPostSameAsOneLoggedIn,
+  checkAuthorOfCommentSameAsOneLoggedIn,
   togglePostUpvote,
+  getUpvoteCount,
   getComments,
   createComment,
+  updateComment,
   deleteComment,
 }

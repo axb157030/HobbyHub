@@ -11,24 +11,24 @@ Time spent: **X** hours spent in total
 The following **required** functionality is completed:
 
 
-- [ ] **Web app includes a create form that allows the user to create posts**
+- [X ] **Web app includes a create form that allows the user to create posts**
   - Form requires users to add a post title
   - Forms should have the *option* for users to add: 
     - additional textual content
     - an image added as an external image URL
-- [ ] **Web app includes a home feed displaying previously created posts**
+- [X ] **Web app includes a home feed displaying previously created posts**
   - Web app must include home feed displaying previously created posts
   - By default, each post on the posts feed should show only the post's:
     - creation time
     - title 
     - upvotes count
   - Clicking on a post should direct the user to a new page for the selected post
-- [ ] **Users can view posts in different ways**
+- [X ] **Users can view posts in different ways**
   - Users can sort posts by either:
     -  creation time
     -  upvotes count
   - Users can search for posts by title
-- [ ] **Users can interact with each post in different ways**
+- [ X] **Users can interact with each post in different ways**
   - The app includes a separate post page for each created post when clicked, where any additional information is shown, including:
     - content
     - image
@@ -37,22 +37,22 @@ The following **required** functionality is completed:
   - Each post includes an upvote button on the post page. 
     - Each authenticated Supabase user, including visitors signed in anonymously by the app, can upvote a post once and remove their own upvote
 
-- [ ] **A post that a user previously created can be edited or deleted from its post pages**
+- [X ] **A post that a user previously created can be edited or deleted from its post pages**
   - After a user creates a new post, they can go back and edit the post
   - A previously created post can be deleted from its post page
 
 The following **optional** features are implemented:
 
 
-- [ ] Web app implements pseudo-authentication
+- [X ] Web app implements pseudo-authentication
   - Supabase anonymously signs the browser in, and its persistent user ID is associated with posts and comments
   - Only the original anonymous user can edit or delete their posts and comments, enforced by row-level security
-- [ ] Users can repost a previous post by referencing its post ID. On the post page of the new post
+- [X ] Users can repost a previous post by referencing its post ID. On the post page of the new post
   - Users can repost a previous post by referencing its post ID
   - On the post page of the new post, the referenced post is displayed and linked, creating a thread
-- [ ] Users can customize the interface
+- [X ] Users can customize the interface
   - e.g., selecting the color scheme or showing the content and image of each post on the home feed
-- [ ] Users can add more characterics to their posts
+- [X ] Users can add more characterics to their posts
   - Users can share and view web videos
   - Users can set flags such as "Question" or "Opinion" while creating a post
   - Users can filter posts by flags on the home feed
@@ -61,22 +61,26 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [X ] List anything else that you added to improve the site's functionality!
+  - I added a supabase query to find whether the author of the post is the same as the one as the author id, supabase gave to the user, essentially the user that is currently logged in. I used The supabase query helpers sign visitors in anonymously before writes and voting—there is no password or author-ID prompt. I used a supabase method to find whether the author has given their upvote to the respective post or not; this is activite every time the upvote button in the page of a post is clicked. I greatly used PL/SQL triggers and methods. I wanted to reuse so made a component called FarmBlogForm to be used for the components to edit, add, and see the posts. I used TipTap starter kit to make the component to edit the respective post. I searched whether it is better to use plain inputs like text area when adding and editing text. I was recommended to use Tiptap to make professional text editors.  
 
 ## Supabase setup
 
-The SQL does not convert an existing `posts.id` column from `bigint`; migrate or recreate that table separately if it uses bigint IDs.
-
 The Supabase query helpers sign visitors in anonymously before writes and voting—there is no password or author-ID prompt. Supabase keeps that identity in the browser so RLS can restrict edits, deletes, and one vote per post. Clearing browser storage loses access to posts and comments created by that anonymous identity; a new browser identity can vote again. Existing `upvotes_count` values are retained when adding vote tracking, but older votes cannot be attributed to users or removed through the new toggle. The create, edit, and detail routes use these helpers; the feed and comments UI still need to be connected.
+
+I set columns such as the id fields the uuid instead of int data types for better security.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<a href="GIF/Codepath_Web102_project8_final_hobby_hub.gif" ><img src='src/assets/video_walkthrough_image.png' title='Video Walkthrough' width='500px' alt='Video Walkthrough' />
+</a>
+<br/>
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
+[LiceCap](https://www.cockos.com/licecap/) 
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows

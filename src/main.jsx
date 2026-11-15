@@ -14,6 +14,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Suspense fallback={<p role="status">Loading page…</p>}>
+        {/* Nested pages share App's header; the URL chooses the page inside its Outlet. */}
         <Routes>
           <Route path="/farm-blog" element={<App />}>
             <Route index element={<FarmFeed />} />

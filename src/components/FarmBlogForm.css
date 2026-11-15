@@ -98,12 +98,12 @@
 }
 
 .farm-blog-field-error,
-.farm-blog-alert {
+.farm-blog-alert .comment-alert{
   color: var(--danger);
   font-size: 0.88rem;
 }
 
-.farm-blog-alert {
+.farm-blog-alert .comment-alert {
   margin: 0 0 1.25rem;
   padding: 0.8rem 1rem;
   border: 1px solid var(--danger);
@@ -358,4 +358,92 @@
   .farm-blog-button {
     transition: none;
   }
+}
+
+.upvote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.upvote__btn {
+  position: relative;
+  z-index: 1;                 /* above the stretched link */
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: var(--primary);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease,
+              color 0.2s ease, transform 0.1s ease;
+}
+
+.upvote__btn:hover:not(:disabled) { border-color: var(--primary); }
+.upvote__btn:active:not(:disabled) { transform: scale(0.9); }
+.upvote__btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.upvote__btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+.upvote__btn[aria-pressed="true"] {
+  color: var(--primary-dark);
+  border-color: var(--primary);
+}
+
+/* Fill fades in/out */
+.upvote-icon {
+  display: block;
+  fill: transparent;
+  transition: fill 0.2s ease;
+}
+.upvote__btn[aria-pressed="true"] .upvote-icon { fill: currentColor; }
+
+/* Upvote: arrow springs up, ring pulses, count slides in from below */
+.upvote.is-up .upvote-icon { animation: upvote-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.upvote.is-up .upvote__btn::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  animation: upvote-ring 0.4s ease-out forwards;
+  pointer-events: none;
+}
+.upvote.is-up .upvote__count { animation: count-up 0.4s ease; }
+
+/* Remove upvote: arrow settles down, count slides in from above */
+.upvote.is-down .upvote-icon { animation: upvote-drop 0.4s ease; }
+.upvote.is-down .upvote__count { animation: count-down 0.4s ease; }
+
+@keyframes upvote-pop {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(-4px) scale(1.35); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes upvote-drop {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(2px) scale(0.8); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes upvote-ring {
+  from { transform: scale(1);   opacity: 0.9; }
+  to   { transform: scale(1.7); opacity: 0; }
+}
+@keyframes count-up {
+  from { transform: translateY(6px);  opacity: 0; color: var(--primary); }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes count-down {
+  from { transform: translateY(-6px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .upvote *, .upvote *::after { animation: none !important; }
+  .upvote__btn, .upvote-icon { transition: none; }
 }

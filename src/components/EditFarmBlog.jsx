@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
 import FarmBlogForm from './FarmBlogForm.jsx'
-import { getPostById, updatePost } from '../utils/supabase_queries.js'
+import { getPostById, updatePost, checkAuthorOfPostSameAsOneLoggedIn } from '../utils/supabase_queries.js'
 
 const EditFarmBlog = () => {
+  // The URL tells this page which post to load.
   const { id } = useParams()
   const navigate = useNavigate()
   const [postResult, setPostResult] = useState({
@@ -14,6 +15,7 @@ const EditFarmBlog = () => {
 
   // Load the saved post first; the form below starts with its current values.
   useEffect(() => {
+    // Ignore a slow response if the user leaves this post before it finishes loading.
     let isCurrent = true
 
     getPostById(id).then(({ data, error }) => {
@@ -36,6 +38,14 @@ const EditFarmBlog = () => {
   const loadError = isLoading ? '' : postResult.error
 
   const handleSave = async (values) => {
+    // This check gives a clear message; the database's RLS policy is the real lock.
+    const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
+
+    if (isRealAuthor.error) return { error: isRealAuthor.error }
+
+    if (!isRealAuthor.data) {
+      return { error: new Error('Only the author of the post can edit the post') }
+    }
     const result = await updatePost(
       id,
       values.title,
@@ -44,7 +54,6 @@ const EditFarmBlog = () => {
       values.flag,
       values.videoUrl,
     )
-
     if (result.error || !result.data) {
       return {
         error:

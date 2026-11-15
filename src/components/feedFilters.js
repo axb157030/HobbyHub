@@ -9,6 +9,7 @@ export const SORT_OPTIONS = {
 
 export const DEFAULT_FILTERS = { sortBy: "newest", flag: "all", titleQuery: "" };
 
+// Return a filtered copy so changing the view never mutates the original post list.
 export const applyFilters = (posts, { sortBy, flag, titleQuery }) => {
   const query = titleQuery.trim().toLowerCase();
 

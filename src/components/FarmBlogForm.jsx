@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Link } from 'react-router'
 import './FarmBlogForm.css'
+import UpvoteIcon from '../icons/UpvoteIcon'
+import {togglePostUpvote, getUpvoteCount} from '../utils/supabase_queries.js'
 
 const getValues = (post) => ({
   title: post?.title ?? '',
@@ -12,6 +14,7 @@ const getValues = (post) => ({
   videoUrl: post?.video_url ?? '',
   repostId: post?.repost_id ?? '',
 })
+
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const isUuid = (value) => UUID_RE.test(value);
@@ -168,7 +171,33 @@ const FarmBlogForm = ({
   const [isDeleting, setIsDeleting] = useState(false)
   const [titleError, setTitleError] = useState('')
   const [repostIdError, setRepostIdError] = useState('')
+  const [upvoteAnim, setUpvoteAnim] = useState(null);
   const isViewing = mode === 'view'
+  const hasUpvoted = useRef(post?.upvotes_count ? Boolean(post.upvotes_count) : false)
+  const [upvoteCount, setUpvoteCount] = useState(post?.upvotes_count)
+
+  const handleUpvote = async () => {
+    if (!post || !post.id) {
+      return;
+    }
+    const {data, error} = await togglePostUpvote(post.id);
+    if(!error) {
+    hasUpvoted.current = data
+    console.log("data", data)
+    console.log("hasUpvoted ", hasUpvoted.current)
+    setUpvoteAnim(hasUpvoted.current ? "down" : "up");
+const {
+  data: upvoteData,
+  error: upvoteErrorCount,
+} = await getUpvoteCount(post.id)
+
+if (!upvoteErrorCount && upvoteData) {
+  setUpvoteCount(upvoteData.upvotes_count)
+}
+    
+    }
+
+  };
 
   const updateValue = (field, value) => {
     setValues((current) => ({ ...current, [field]: value }))
@@ -202,7 +231,7 @@ const FarmBlogForm = ({
         repostId: values.repostId.trim() || null,
       })
 
-      if (error) setErrorMessage(error.message || 'The post could not be saved.')
+      if (error) setErrorMessage(error.message + 'Details: ' + error?.details || 'The post could not be saved.')
     } catch (error) {
       setErrorMessage(
         error instanceof Error ? error.message : 'The post could not be saved.',
@@ -269,7 +298,21 @@ const FarmBlogForm = ({
             {post.updated_at && post.updated_at !== post.created_at && (
               <span>Updated {formatDate(post.updated_at)}</span>
             )}
-            <span>{post.upvotes_count ?? 0} upvotes</span>
+            <span
+              className={`upvote ${upvoteAnim ? `is-${upvoteAnim}` : ""}`}
+              onAnimationEnd={() => setUpvoteAnim(null)}
+            >
+              <span className="upvote__count">{upvoteCount ?? 0} upvotes</span>
+              <button
+                type="button"
+                className="upvote__btn"
+                aria-pressed={hasUpvoted.current}
+                aria-label={hasUpvoted.current ? "Remove upvote" : "Upvote"}
+                onClick={handleUpvote}
+              >
+                <UpvoteIcon />
+              </button>
+            </span>
             {post.flag && (
               <span className="farm-blog-badge">{post.flag}</span>
             )}
