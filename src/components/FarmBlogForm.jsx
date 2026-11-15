@@ -231,7 +231,7 @@ if (!upvoteErrorCount && upvoteData) {
         repostId: values.repostId.trim() || null,
       })
 
-      if (error) setErrorMessage(error.message + 'Details: ' + error?.details || 'The post could not be saved.')
+      if (error) setErrorMessage(error.message + 'Details: ' + error?.details + " " + error?.details || 'The post could not be saved.')
     } catch (error) {
       setErrorMessage(
         error instanceof Error ? error.message : 'The post could not be saved.',
