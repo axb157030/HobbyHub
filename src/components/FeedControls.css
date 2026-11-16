@@ -1,8 +1,19 @@
 .feed-controls {
+  /* local tokens: light-dark(day, night) */
+  --fc-bg: light-dark(#fbf8f1, #23211a);
+  --fc-border: light-dark(#e3dccb, #3b3729);
+  --fc-label: light-dark(#7a725d, #b3aa91);
+  --fc-ink: light-dark(#2e2a1f, #ece6d4);
+  --fc-field-bg: light-dark(#fff, #1a1912);
+  --fc-focus: light-dark(#5b8c3a, #8fc366);
+  --fc-btn-bg: light-dark(#e6f0dc, #2f4220);
+  --fc-btn-bg-hover: light-dark(#d6e6c6, #3b5428);
+  --fc-btn-text: light-dark(#3f6b22, #b7e08f);
+
   margin-bottom: 1.5rem;
   padding: 1rem 1.25rem;
-  background: #fbf8f1;
-  border: 1px solid #e3dccb;
+  background: var(--fc-bg);
+  border: 1px solid var(--fc-border);
   border-radius: 12px;
 }
 
@@ -26,22 +37,22 @@
 .feed-controls label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #7a725d;
+  color: var(--fc-label);
 }
 
 .feed-controls input,
 .feed-controls select {
   padding: 0.5rem 0.7rem;
   font: inherit;
-  color: #2e2a1f;
-  background: #fff;
-  border: 1px solid #e3dccb;
+  color: var(--fc-ink);
+  background: var(--fc-field-bg);
+  border: 1px solid var(--fc-border);
   border-radius: 8px;
 }
 
 .feed-controls input:focus-visible,
 .feed-controls select:focus-visible {
-  outline: 3px solid #5b8c3a;
+  outline: 3px solid var(--fc-focus);
   outline-offset: 1px;
 }
 
@@ -49,19 +60,19 @@
   padding: 0.5rem 1rem;
   font: inherit;
   font-weight: 600;
-  color: #3f6b22;
-  background: #e6f0dc;
+  color: var(--fc-btn-text);
+  background: var(--fc-btn-bg);
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .feed-controls__reset:hover {
-  background: #d6e7c7;
+  background: var(--fc-btn-bg-hover);
 }
 
 .feed-controls__count {
   margin: 0.75rem 0 0;
   font-size: 0.85rem;
-  color: #7a725d;
+  color: var(--fc-ink);
 }
