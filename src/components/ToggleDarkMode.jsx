@@ -8,7 +8,8 @@ const ToggleDarkMode = () => {
   const [isLightMode, setIsLightMode] = useState(true);
 
   useEffect(() => {
-    document.documentElement.style.colorScheme = isLightMode ? "light" : "dark";
+    // Replacing this because this toggling light and dark theme did not work when deployed: document.documentElement.style.colorScheme = isLightMode ? "light" : "dark";
+    document.documentElement.dataset.theme = isLightMode ? "light" : "dark"; 
   }, [isLightMode]);
 
   return (
