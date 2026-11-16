@@ -4,7 +4,7 @@ Submitted by: **Amine Benelbar**
 
 This web app: **Users can make posts and edit and delete the posts they made. Supabase access policies were added to restrict users to only add, edit, and delete their posts and comments. Users may only add one upvote per post. Posts have many comments.**
 
-Time spent: **6.5** hours spent in total
+Time spent: **7.0** hours spent in total
 
 ## Required Features
 
@@ -85,6 +85,10 @@ GIF created with ...
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
 [peek](https://github.com/phw/peek) for Linux. -->
+
+## Deployment
+
+<a href="https://hobbyhub-feiv.onrender.com/farm-blog">See site</a>
 
 ## Notes
 
