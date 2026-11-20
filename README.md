@@ -92,8 +92,8 @@ GIF created with ...
 
 
 ## Notes
+
 <small>After completion of this project, I have restricted features of the website. I will soon delete the website.</small>
-Describe any challenges encountered while building the app.
 
 ## License
 
