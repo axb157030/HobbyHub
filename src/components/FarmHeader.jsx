@@ -21,22 +21,22 @@ try { localStorage.setItem("theme", next); } catch {}
       <header className="navbar">
         <div className="navbar-inner">
           {/* Brand: plain Link (not NavLink) so it never gets an "active" style */}
-          <Link to="/farm-blog" className="navbar-brand" aria-label="Crewmates, go to dashboard">
+          <Link to="/farm-forum" className="navbar-brand" aria-label="Crewmates, go to dashboard">
             <span className="navbar-mark">
               <FarmIcon />
             </span>
             <span className="navbar-brand-text">
               <strong>Farm Feed</strong>
-              <small>Farm blogs</small>
+              <small>Farm forums</small>
             </span>
           </Link>
 
 
           <nav className="navbar-links" aria-label="Main Header">
-            <NavLink to="/farm-blog" end className="navbar-link">
+            <NavLink to="/farm-forum" end className="navbar-link">
               Dashboard
             </NavLink>
-            <NavLink to="/farm-blog/add" className="navbar-link navbar-cta">
+            <NavLink to="/farm-forum/add" className="navbar-link navbar-cta">
               <PlusIcon />
               Add post
             </NavLink>

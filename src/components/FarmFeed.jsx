@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import FeedControls from "./FeedControls";
-import FarmBlogCard from "./FarmBlogCard";
+import FarmForumCard from "./FarmForumCard";
 import { DEFAULT_FILTERS, applyFilters } from "./feedFilters";
 import { getPublicFeed } from "../utils/supabase_queries.js";
 import "./FarmFeed.css";
@@ -77,8 +77,8 @@ const FarmFeed = () => {
       {!loading && !error && visiblePosts.length > 0 && (
         <div className="farm-feed__grid">
           {visiblePosts.map((post) => (
-            <Link key={post.id} to={`/farm-blog/${post.id}`}>
-              <FarmBlogCard post={post} />
+            <Link key={post.id} to={`/farm-forum/${post.id}`}>
+              <FarmForumCard post={post} />
               </Link>
           ))}
         </div>

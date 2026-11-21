@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Link } from 'react-router'
-import './FarmBlogForm.css'
+import './FarmForumForm.css'
 import UpvoteIcon from '../icons/UpvoteIcon'
 import {togglePostUpvote, getUpvoteCount} from '../utils/supabase_queries.js'
 
@@ -31,7 +31,7 @@ const formatDate = (value) => {
 
 // Unlike a plain textarea, TipTap keeps formatting such as bold text and lists.
 // It saves that document as HTML, and the same editor can show it read-only later.
-const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
+const forumEditor = ({ content, onChange, readOnly = false, labelId }) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: content || '',
@@ -40,7 +40,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
       attributes: {
         spellcheck: 'true',
         lang: 'en',
-        class: 'farm-blog-editor__prose',
+        class: 'farm-forum-editor__prose',
         ...(readOnly
           ? { 'aria-label': 'Post content' }
           : { 'aria-labelledby': labelId }),
@@ -71,13 +71,13 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
 
   return (
     <div
-      className={`farm-blog-editor${readOnly ? ' farm-blog-editor--readonly' : ''}`}
+      className={`farm-forum-editor${readOnly ? ' farm-forum-editor--readonly' : ''}`}
     >
       {!readOnly && editor && (
-        <div className="farm-blog-editor__toolbar" role="toolbar" aria-label="Text formatting">
+        <div className="farm-forum-editor__toolbar" role="toolbar" aria-label="Text formatting">
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Bold"
             title="Bold"
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -86,7 +86,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Italic"
             title="Italic"
             onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -95,7 +95,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Heading"
             title="Heading"
             onClick={() =>
@@ -106,7 +106,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Bulleted list"
             title="Bulleted list"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -115,7 +115,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Numbered list"
             title="Numbered list"
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -124,17 +124,17 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Block quote"
             title="Block quote"
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
           >
             Quote
           </button>
-          <span className="farm-blog-editor__toolbar-spacer" />
+          <span className="farm-forum-editor__toolbar-spacer" />
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Undo"
             title="Undo"
             onClick={() => editor.chain().focus().undo().run()}
@@ -143,7 +143,7 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
           <button
             type="button"
-            className="farm-blog-editor__tool"
+            className="farm-forum-editor__tool"
             aria-label="Redo"
             title="Redo"
             onClick={() => editor.chain().focus().redo().run()}
@@ -152,12 +152,12 @@ const BlogEditor = ({ content, onChange, readOnly = false, labelId }) => {
           </button>
         </div>
       )}
-      <EditorContent editor={editor} className="farm-blog-editor__content" />
+      <EditorContent editor={editor} className="farm-forum-editor__content" />
     </div>
   )
 }
 
-const FarmBlogForm = ({
+const FarmForumForm = ({
   mode = 'create',
   post = null,
   onSave,
@@ -263,17 +263,17 @@ if (!upvoteErrorCount && upvoteData) {
 
   if (isViewing && post) {
     return (
-      <main className="farm-blog-page">
-        <article className="farm-blog-card">
-          <div className="farm-blog-card__actions">
+      <main className="farm-forum-page">
+        <article className="farm-forum-card">
+          <div className="farm-forum-card__actions">
             <Link
-              className="farm-blog-button farm-blog-button--secondary"
-              to={`/farm-blog/${post.id}/edit`}
+              className="farm-forum-button farm-forum-button--secondary"
+              to={`/farm-forum/${post.id}/edit`}
             >
               Edit post
             </Link>
             <button
-              className="farm-blog-button farm-blog-button--danger"
+              className="farm-forum-button farm-forum-button--danger"
               type="button"
               onClick={handleDelete}
               disabled={isDeleting}
@@ -283,14 +283,14 @@ if (!upvoteErrorCount && upvoteData) {
           </div>
 
           {errorMessage && (
-            <p className="farm-blog-alert" role="alert">
+            <p className="farm-forum-alert" role="alert">
               {errorMessage}
             </p>
           )}
 
-          <p className="farm-blog-eyebrow">Farm journal</p>
-          <h1 className="farm-blog-title">{post.title}</h1>
-          <div className="farm-blog-meta">
+          <p className="farm-forum-eyebrow">Farm journal</p>
+          <h1 className="farm-forum-title">{post.title}</h1>
+          <div className="farm-forum-meta">
             {post.created_at && (
               <time dateTime={post.created_at}>
                 Posted {formatDate(post.created_at)}
@@ -315,28 +315,28 @@ if (!upvoteErrorCount && upvoteData) {
               </button>
             </span>
             {post.flag && (
-              <span className="farm-blog-badge">{post.flag}</span>
+              <span className="farm-forum-badge">{post.flag}</span>
             )}
           </div>
 
           {post.repost_id && (
-            <p className="farm-blog-repost">
+            <p className="farm-forum-repost">
               Reposted from{' '}
-              <Link to={`/farm-blog/${post.repost_id}`}>
+              <Link to={`/farm-forum/${post.repost_id}`}>
                 the original post
               </Link>
             </p>
           )}
 
           {post.content && (
-            <section className="farm-blog-reading">
-              <BlogEditor content={post.content} readOnly />
+            <section className="farm-forum-reading">
+              <forumEditor content={post.content} readOnly />
             </section>
           )}
 
           {post.image_url && (
             <img
-              className="farm-blog-image"
+              className="farm-forum-image"
               src={post.image_url}
               alt={post.title}
               loading="lazy"
@@ -345,7 +345,7 @@ if (!upvoteErrorCount && upvoteData) {
 
           {post.video_url && (
             <a
-              className="farm-blog-video-link"
+              className="farm-forum-video-link"
               href={post.video_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -361,31 +361,31 @@ if (!upvoteErrorCount && upvoteData) {
   const isEditing = mode === 'edit'
 
   return (
-    <main className="farm-blog-page">
-      <section className="farm-blog-card">
-        <header className="farm-blog-page__header">
-          <p className="farm-blog-eyebrow">
+    <main className="farm-forum-page">
+      <section className="farm-forum-card">
+        <header className="farm-forum-page__header">
+          <p className="farm-forum-eyebrow">
             {isEditing ? 'Your farm journal' : 'Share what you’ve learned'}
           </p>
-          <h1 className="farm-blog-title">
+          <h1 className="farm-forum-title">
             {isEditing ? 'Edit your post' : 'Write a farm post'}
           </h1>
-          <p className="farm-blog-intro">
+          <p className="farm-forum-intro">
             Share a practical idea, question, or lesson from the field.
           </p>
         </header>
 
         {errorMessage && (
-          <p className="farm-blog-alert" role="alert">
+          <p className="farm-forum-alert" role="alert">
             {errorMessage}
           </p>
         )}
 
-        <form className="farm-blog-form" onSubmit={handleSave}>
-          <div className="farm-blog-field">
-            <label htmlFor="farm-blog-title">Title</label>
+        <form className="farm-forum-form" onSubmit={handleSave}>
+          <div className="farm-forum-field">
+            <label htmlFor="farm-forum-title">Title</label>
             <input
-              id="farm-blog-title"
+              id="farm-forum-title"
               name="title"
               type="text"
               value={values.title}
@@ -394,41 +394,41 @@ if (!upvoteErrorCount && upvoteData) {
                 if (titleError) setTitleError('')
               }}
               aria-invalid={Boolean(titleError)}
-              aria-describedby={titleError ? 'farm-blog-title-error' : undefined}
+              aria-describedby={titleError ? 'farm-forum-title-error' : undefined}
               required
               autoComplete="off"
               placeholder="A clear, specific title"
             />
             {titleError && (
               <span
-                className="farm-blog-field-error"
-                id="farm-blog-title-error"
+                className="farm-forum-field-error"
+                id="farm-forum-title-error"
               >
                 {titleError}
               </span>
             )}
           </div>
 
-          <div className="farm-blog-field">
-            <span className="farm-blog-label" id="farm-blog-content-label">
-              Story <span className="farm-blog-optional">(optional)</span>
+          <div className="farm-forum-field">
+            <span className="farm-forum-label" id="farm-forum-content-label">
+              Story <span className="farm-forum-optional">(optional)</span>
             </span>
-            <BlogEditor
+            <forumEditor
               content={values.content}
               onChange={(content) => updateValue('content', content)}
-              labelId="farm-blog-content-label"
+              labelId="farm-forum-content-label"
             />
-            <p className="farm-blog-help">
+            <p className="farm-forum-help">
               Use the formatting tools to make your post easier to read.
             </p>
           </div>
 
-          <div className="farm-blog-field">
-            <label htmlFor="farm-blog-image-url">
-              Image URL <span className="farm-blog-optional">(optional)</span>
+          <div className="farm-forum-field">
+            <label htmlFor="farm-forum-image-url">
+              Image URL <span className="farm-forum-optional">(optional)</span>
             </label>
             <input
-              id="farm-blog-image-url"
+              id="farm-forum-image-url"
               name="imageUrl"
               type="url"
               value={values.imageUrl}
@@ -437,12 +437,12 @@ if (!upvoteErrorCount && upvoteData) {
             />
           </div>
 
-          <div className="farm-blog-field">
-            <label htmlFor="farm-blog-flag">
-              Topic <span className="farm-blog-optional">(optional)</span>
+          <div className="farm-forum-field">
+            <label htmlFor="farm-forum-flag">
+              Topic <span className="farm-forum-optional">(optional)</span>
             </label>
             <select
-              id="farm-blog-flag"
+              id="farm-forum-flag"
               name="flag"
               value={values.flag}
               onChange={(event) => updateValue('flag', event.target.value)}
@@ -455,12 +455,12 @@ if (!upvoteErrorCount && upvoteData) {
             </select>
           </div>
 
-          <div className="farm-blog-field">
-            <label htmlFor="farm-blog-video-url">
-              Video URL <span className="farm-blog-optional">(optional)</span>
+          <div className="farm-forum-field">
+            <label htmlFor="farm-forum-video-url">
+              Video URL <span className="farm-forum-optional">(optional)</span>
             </label>
             <input
-              id="farm-blog-video-url"
+              id="farm-forum-video-url"
               name="videoUrl"
               type="url"
               value={values.videoUrl}
@@ -470,13 +470,13 @@ if (!upvoteErrorCount && upvoteData) {
           </div>
 
           {!isEditing && (
-            <div className="farm-blog-field">
-              <label htmlFor="farm-blog-repost-id">
+            <div className="farm-forum-field">
+              <label htmlFor="farm-forum-repost-id">
                 Repost an existing post{' '}
-                <span className="farm-blog-optional">(optional)</span>
+                <span className="farm-forum-optional">(optional)</span>
               </label>
               <input
-                id="farm-blog-repost-id"
+                id="farm-forum-repost-id"
                 name="repostId"
                 type="text"
                 value={values.repostId}
@@ -486,8 +486,8 @@ if (!upvoteErrorCount && upvoteData) {
 
               {repostIdError && (
                 <span
-                  className="farm-blog-field-error"
-                  id="farm-blog-title-error"
+                  className="farm-forum-field-error"
+                  id="farm-forum-title-error"
                 >
                   {repostIdError}
                 </span>
@@ -495,9 +495,9 @@ if (!upvoteErrorCount && upvoteData) {
             </div>
           )}
 
-          <div className="farm-blog-form__actions">
+          <div className="farm-forum-form__actions">
             <button
-              className="farm-blog-button farm-blog-button--primary"
+              className="farm-forum-button farm-forum-button--primary"
               type="submit"
               disabled={isSaving}
             >
@@ -508,13 +508,13 @@ if (!upvoteErrorCount && upvoteData) {
                   : 'Publish post'}
             </button>
             <Link
-              className="farm-blog-button farm-blog-button--secondary"
-              to={cancelTo || (isEditing && post ? `/farm-blog/${post.id}` : '/farm-blog')}
+              className="farm-forum-button farm-forum-button--secondary"
+              to={cancelTo || (isEditing && post ? `/farm-forum/${post.id}` : '/farm-forum')}
             >
               Cancel
             </Link>
             {isEditing && post && (
-              <span className="farm-blog-upvote-note">
+              <span className="farm-forum-upvote-note">
                 Upvotes: {post.upvotes_count ?? 0} · Cannot be edited
               </span>
             )}
@@ -525,4 +525,4 @@ if (!upvoteErrorCount && upvoteData) {
   )
 }
 
-export default FarmBlogForm
+export default FarmForumForm

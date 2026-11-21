@@ -21,17 +21,17 @@
 
 
 
-- **AddFarmBlog** Adds a post. `Users can set flags such as "Question" or "Opinion" while creating a post`. User does not add the author. Supabase anonymous sign-in assigns a persistent browser identity in the background; no password or author-ID prompt is required. Users must add the title. It is mandatory. Form will not submit without the post title. Users can add a flag that from a list of predetermined options, provide a video link. Upvotes are 0 upon addition. Users cannot change upvote number. Users cannot add comments. Creation Date is made automatically.
+- **AddFarmForum** Adds a post. `Users can set flags such as "Question" or "Opinion" while creating a post`. User does not add the author. Supabase anonymous sign-in assigns a persistent browser identity in the background; no password or author-ID prompt is required. Users must add the title. It is mandatory. Form will not submit without the post title. Users can add a flag that from a list of predetermined options, provide a video link. Upvotes are 0 upon addition. Users cannot change upvote number. Users cannot add comments. Creation Date is made automatically.
 
-- **EditFarmBlog** Edits a post. Similar to **AddFarmBlog** component but creation date is not changed. Update date is changed though. Upvote will not necessarily be 0 and users cannot modify that. Users can edit only posts made by their browser identity, enforced by Supabase RLS. Go to it when going to see details of farm blog. This field allowing users to edit and delete blogs is available in FarmBlogDetails. Also updated_at post column will be updated with most current date. Clearing browser storage loses access to that identity's posts.
+- **EditFarmForum** Edits a post. Similar to **AddFarmForum** component but creation date is not changed. Update date is changed though. Upvote will not necessarily be 0 and users cannot modify that. Users can edit only posts made by their browser identity, enforced by Supabase RLS. Go to it when going to see details of farm forum. This field allowing users to edit and delete forums is available in FarmForumDetails. Also updated_at post column will be updated with most current date. Clearing browser storage loses access to that identity's posts.
 
 -
 
-- **FarmBlogCard** displays one's post's creation time, title, upvotes count.
+- **FarmForumCard** displays one's post's creation time, title, upvotes count.
 
-- **FarmBlogDetails** shows one complete post and its comments. If it’s a repost, it includes - RepostPreview, which displays and links to the original post. Users can increment and decrement the upvote by one and only one. One upvote, one author. User can add N comments to a post and delete only their comments. Also updated_at comment column will be updated with most current date when user edits their comments. There is a delete and edit button allowing users to delete and edit their own blogs. Users can a video and 
+- **FarmForumDetails** shows one complete post and its comments. If it’s a repost, it includes - RepostPreview, which displays and links to the original post. Users can increment and decrement the upvote by one and only one. One upvote, one author. User can add N comments to a post and delete only their comments. Also updated_at comment column will be updated with most current date when user edits their comments. There is a delete and edit button allowing users to delete and edit their own forums. Users can a video and 
 
-- **FarmBlogForm** handles creating, editing, and adding a post. It can also create a repost, but a repost is a new post with a reference to the original; it doesn’t modify the original. Has a flag that pass to it indicating where users can add a blog or not. Repost creation includes a field to give the original post ID. No author ID field is needed; Supabase anonymous auth and RLS determine whether the current browser identity can edit or delete the post. Should users be able to change repost id anywhere when editing the post?
+- **FarmForumForm** handles creating, editing, and adding a post. It can also create a repost, but a repost is a new post with a reference to the original; it doesn’t modify the original. Has a flag that pass to it indicating where users can add a forum or not. Repost creation includes a field to give the original post ID. No author ID field is needed; Supabase anonymous auth and RLS determine whether the current browser identity can edit or delete the post. Should users be able to change repost id anywhere when editing the post?
 
 - **CommentSection** displays comments; CommentForm adds one. Keep comment deletion available only to its author, and enforce that in Supabase RLS too.
 
@@ -44,14 +44,14 @@ App
 └── Main
     ├── FarmFeed
     │   ├── FeedControls
-    │   └── FarmBlogCard list
-    ├── FarmBlogDetails
-    |  |__ EditFarmBlog
+    │   └── FarmForumCard list
+    ├── FarmForumDetails
+    |  |__ EditFarmForum
     |     |
-    |       |__ FarmBlogForm
+    |       |__ FarmForumForm
     |
-    |__ AddFarmBlog
+    |__ AddFarmForum
         |
-        |__FarmBlogForm
+        |__FarmForumForm
   
 ```

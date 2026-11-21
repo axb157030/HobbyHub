@@ -5,10 +5,10 @@ import App from './App.jsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import FarmFeed from './components/FarmFeed.jsx'
 import {
-  AddFarmBlog,
-  EditFarmBlog,
-  FarmBlogDetails,
-} from './routes/FarmBlogRoutes.jsx'
+  AddFarmForum,
+  EditFarmForum,
+  FarmForumDetails,
+} from './routes/FarmForumRoutes.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,13 +16,13 @@ createRoot(document.getElementById('root')).render(
       <Suspense fallback={<p role="status">Loading page…</p>}>
         {/* Nested pages share App's header; the URL chooses the page inside its Outlet. */}
         <Routes>
-          <Route path="/farm-blog" element={<App />}>
+          <Route path="/farm-forum" element={<App />}>
             <Route index element={<FarmFeed />} />
-            <Route path="add" element={<AddFarmBlog />} />
-            <Route path=":id" element={<FarmBlogDetails />} />
-            <Route path=":id/edit" element={<EditFarmBlog />} />
+            <Route path="add" element={<AddFarmForum />} />
+            <Route path=":id" element={<FarmForumDetails />} />
+            <Route path=":id/edit" element={<EditFarmForum />} />
           </Route>
-          <Route path="*" element={<Navigate to="/farm-blog" replace />} />
+          <Route path="*" element={<Navigate to="/farm-forum" replace />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

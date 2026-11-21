@@ -1,11 +1,11 @@
-import "./FarmBlogCard.css";
+import "./FarmForumCard.css";
 
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 }; // Thank you, https://stackoverflow.com/questions/48689876/how-to-convert-timestamp-in-react-js
 
-const FarmBlogCard = ({ post }) => {
+const FarmForumCard = ({ post }) => {
   return (
     <article
       className="farm-card"
@@ -28,4 +28,4 @@ const FarmBlogCard = ({ post }) => {
   );
 };
 
-export default FarmBlogCard;
+export default FarmForumCard;

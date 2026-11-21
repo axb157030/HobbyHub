@@ -1,4 +1,4 @@
-# Web Development Final Project - *HobbyHub Farm Blogs*
+# Web Development Final Project - *HobbyHub Farm Forums*
 
 Submitted by: **Amine Benelbar**
 
@@ -62,7 +62,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [X ] List anything else that you added to improve the site's functionality!
-  - I added a supabase query to find whether the author of the post is the same as the one as the author id, supabase gave to the user, essentially the user that is currently logged in. I used The supabase query helpers sign visitors in anonymously before writes and voting—there is no password or author-ID prompt. I used a supabase method to find whether the author has given their upvote to the respective post or not; this is activite every time the upvote button in the page of a post is clicked. I greatly used PL/SQL triggers and methods. I wanted to reuse so made a component called FarmBlogForm to be used for the components to edit, add, and see the posts. I used TipTap starter kit to make the component to edit the respective post. I searched whether it is better to use plain inputs like text area when adding and editing text. I was recommended to use Tiptap to make professional text editors.  
+  - I added a supabase query to find whether the author of the post is the same as the one as the author id, supabase gave to the user, essentially the user that is currently logged in. I used The supabase query helpers sign visitors in anonymously before writes and voting—there is no password or author-ID prompt. I used a supabase method to find whether the author has given their upvote to the respective post or not; this is activite every time the upvote button in the page of a post is clicked. I greatly used PL/SQL triggers and methods. I wanted to reuse so made a component called FarmForumForm to be used for the components to edit, add, and see the posts. I used TipTap starter kit to make the component to edit the respective post. I searched whether it is better to use plain inputs like text area when adding and editing text. I was recommended to use Tiptap to make professional text editors.  
 
 ## Supabase setup
 
@@ -88,7 +88,7 @@ GIF created with ...
 
 ## Deployment
 
-<a href="https://hobbyhub-feiv.onrender.com/farm-blog">See site</a>
+<a href="https://hobbyhub-feiv.onrender.com/farm-forum">See site</a>
 
 
 ## Notes

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
-import FarmBlogForm from './FarmBlogForm.jsx'
+import FarmForumForm from './FarmForumForm.jsx'
 import { getPostById, updatePost, checkAuthorOfPostSameAsOneLoggedIn } from '../utils/supabase_queries.js'
 
-const EditFarmBlog = () => {
+const EditFarmForum = () => {
   // The URL tells this page which post to load.
   const { id } = useParams()
   const navigate = useNavigate()
@@ -61,13 +61,13 @@ const EditFarmBlog = () => {
       }
     }
 
-    navigate(`/farm-blog/${id}`)
+    navigate(`/farm-forum/${id}`)
     return { error: null }
   }
 
   if (isLoading) {
     return (
-      <main className="farm-blog-page">
+      <main className="farm-forum-page">
         <p role="status">Loading post…</p>
       </main>
     )
@@ -75,12 +75,12 @@ const EditFarmBlog = () => {
 
   if (loadError || !post) {
     return (
-      <main className="farm-blog-page">
-        <section className="farm-blog-card">
-          <p className="farm-blog-alert" role="alert">
+      <main className="farm-forum-page">
+        <section className="farm-forum-card">
+          <p className="farm-forum-alert" role="alert">
             {loadError || 'Post not found.'}
           </p>
-          <Link className="farm-blog-button farm-blog-button--secondary" to="/farm-blog">
+          <Link className="farm-forum-button farm-forum-button--secondary" to="/farm-forum">
             Back to the feed
           </Link>
         </section>
@@ -89,14 +89,14 @@ const EditFarmBlog = () => {
   }
 
   return (
-    <FarmBlogForm
+    <FarmForumForm
       key={post.id}
       mode="edit"
       post={post}
       onSave={handleSave}
-      cancelTo={`/farm-blog/${id}`}
+      cancelTo={`/farm-forum/${id}`}
     />
   )
 }
 
-export default EditFarmBlog
+export default EditFarmForum

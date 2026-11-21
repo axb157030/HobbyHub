@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router'
-import FarmBlogForm from './FarmBlogForm.jsx'
+import FarmForumForm from './FarmForumForm.jsx'
 import { createPost } from '../utils/supabase_queries.js'
 
-const AddFarmBlog = () => {
+const AddFarmForum = () => {
   const navigate = useNavigate()
 
   // This page saves the shared form's values, then opens the post that was created.
@@ -22,17 +22,17 @@ const AddFarmBlog = () => {
       }
     }
 
-    navigate(`/farm-blog/${data.id}`)
+    navigate(`/farm-forum/${data.id}`)
     return { error: null }
   }
 
   return (
-    <FarmBlogForm
+    <FarmForumForm
       mode="create"
       onSave={handleSave}
-      cancelTo="/farm-blog"
+      cancelTo="/farm-forum"
     />
   )
 }
 
-export default AddFarmBlog
+export default AddFarmForum

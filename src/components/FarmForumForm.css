@@ -1,10 +1,10 @@
-.farm-blog-page {
+.farm-forum-page {
   width: calc(100% - 2rem);
   max-width: 54rem;
   margin: clamp(2rem, 5vw, 4rem) auto 5rem;
 }
 
-.farm-blog-card {
+.farm-forum-card {
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
   border-radius: 1.25rem;
@@ -12,11 +12,11 @@
   box-shadow: var(--shadow);
 }
 
-.farm-blog-page__header {
+.farm-forum-page__header {
   margin-bottom: 2rem;
 }
 
-.farm-blog-eyebrow {
+.farm-forum-eyebrow {
   margin: 0 0 0.45rem;
   color: var(--primary);
   font-size: 0.76rem;
@@ -25,7 +25,7 @@
   text-transform: uppercase;
 }
 
-.farm-blog-title {
+.farm-forum-title {
   margin: 0;
   color: var(--text-h);
   font-family: var(--heading);
@@ -34,37 +34,37 @@
   line-height: 1.15;
 }
 
-.farm-blog-intro {
+.farm-forum-intro {
   max-width: 42rem;
   margin: 0.8rem 0 0;
   color: var(--muted);
 }
 
-.farm-blog-form {
+.farm-forum-form {
   display: grid;
   gap: 1.4rem;
 }
 
-.farm-blog-field {
+.farm-forum-field {
   display: grid;
   gap: 0.55rem;
 }
 
-.farm-blog-field > label,
-.farm-blog-label {
+.farm-forum-field > label,
+.farm-forum-label {
   color: var(--text);
   font-size: 0.92rem;
   font-weight: 650;
 }
 
-.farm-blog-optional {
+.farm-forum-optional {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 400;
 }
 
-.farm-blog-field input,
-.farm-blog-field select {
+.farm-forum-field input,
+.farm-forum-field select {
   width: 100%;
   min-height: 3rem;
   padding: 0.7rem 0.85rem;
@@ -77,33 +77,33 @@
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.farm-blog-field input::placeholder {
+.farm-forum-field input::placeholder {
   color: var(--muted);
   opacity: 0.8;
 }
 
-.farm-blog-field input:focus-visible,
-.farm-blog-field select:focus-visible,
-.farm-blog-button:focus-visible,
-.farm-blog-editor__tool:focus-visible,
-.farm-blog-video-link:focus-visible,
-.farm-blog-repost a:focus-visible {
+.farm-forum-field input:focus-visible,
+.farm-forum-field select:focus-visible,
+.farm-forum-button:focus-visible,
+.farm-forum-editor__tool:focus-visible,
+.farm-forum-video-link:focus-visible,
+.farm-forum-repost a:focus-visible {
   border-color: var(--primary);
   outline: 3px solid var(--accent-bg);
   outline-offset: 2px;
 }
 
-.farm-blog-field input[aria-invalid='true'] {
+.farm-forum-field input[aria-invalid='true'] {
   border-color: var(--danger);
 }
 
-.farm-blog-field-error,
-.farm-blog-alert .comment-alert{
+.farm-forum-field-error,
+.farm-forum-alert .comment-alert{
   color: var(--danger);
   font-size: 0.88rem;
 }
 
-.farm-blog-alert .comment-alert {
+.farm-forum-alert .comment-alert {
   margin: 0 0 1.25rem;
   padding: 0.8rem 1rem;
   border: 1px solid var(--danger);
@@ -111,25 +111,25 @@
   background: color-mix(in srgb, var(--danger) 9%, var(--surface));
 }
 
-.farm-blog-help {
+.farm-forum-help {
   margin: 0;
   color: var(--muted);
   font-size: 0.82rem;
 }
 
-.farm-blog-editor {
+.farm-forum-editor {
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 0.8rem;
   background: var(--bg);
 }
 
-.farm-blog-editor:focus-within {
+.farm-forum-editor:focus-within {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
-.farm-blog-editor__toolbar {
+.farm-forum-editor__toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -139,7 +139,7 @@
   background: var(--surface);
 }
 
-.farm-blog-editor__tool {
+.farm-forum-editor__tool {
   min-width: 2.35rem;
   min-height: 2.25rem;
   padding: 0.35rem 0.55rem;
@@ -152,16 +152,16 @@
   font-size: 0.84rem;
 }
 
-.farm-blog-editor__tool:hover {
+.farm-forum-editor__tool:hover {
   border-color: var(--border);
   background: var(--accent-bg);
 }
 
-.farm-blog-editor__toolbar-spacer {
+.farm-forum-editor__toolbar-spacer {
   flex: 1;
 }
 
-.farm-blog-editor__content .farm-blog-editor__prose {
+.farm-forum-editor__content .farm-forum-editor__prose {
   min-height: 15rem;
   padding: 0.95rem 1rem;
   color: var(--text);
@@ -169,21 +169,21 @@
   line-height: 1.75;
 }
 
-.farm-blog-editor__prose > :first-child {
+.farm-forum-editor__prose > :first-child {
   margin-top: 0;
 }
 
-.farm-blog-editor__prose > :last-child {
+.farm-forum-editor__prose > :last-child {
   margin-bottom: 0;
 }
 
-.farm-blog-editor__prose h2,
-.farm-blog-editor__prose h3 {
+.farm-forum-editor__prose h2,
+.farm-forum-editor__prose h3 {
   color: var(--text-h);
   line-height: 1.3;
 }
 
-.farm-blog-editor__prose blockquote {
+.farm-forum-editor__prose blockquote {
   margin-right: 0;
   margin-left: 0;
   padding-left: 1rem;
@@ -191,40 +191,40 @@
   color: var(--muted);
 }
 
-.farm-blog-editor__prose ul,
-.farm-blog-editor__prose ol {
+.farm-forum-editor__prose ul,
+.farm-forum-editor__prose ol {
   padding-left: 1.5rem;
 }
 
-.farm-blog-editor--readonly {
+.farm-forum-editor--readonly {
   overflow: visible;
   border: 0;
   background: transparent;
 }
 
-.farm-blog-editor--readonly .farm-blog-editor__content .farm-blog-editor__prose {
+.farm-forum-editor--readonly .farm-forum-editor__content .farm-forum-editor__prose {
   min-height: 0;
   padding: 0;
 }
 
-.farm-blog-form__actions,
-.farm-blog-card__actions {
+.farm-forum-form__actions,
+.farm-forum-card__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.7rem;
 }
 
-.farm-blog-form__actions {
+.farm-forum-form__actions {
   margin-top: 0.3rem;
 }
 
-.farm-blog-card__actions {
+.farm-forum-card__actions {
   justify-content: flex-end;
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-.farm-blog-button {
+.farm-forum-button {
   display: inline-flex;
   min-height: 2.8rem;
   align-items: center;
@@ -241,51 +241,51 @@
     transform 0.18s ease;
 }
 
-.farm-blog-button:hover:not(:disabled) {
+.farm-forum-button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
-.farm-blog-button:disabled {
+.farm-forum-button:disabled {
   cursor: wait;
   opacity: 0.65;
 }
 
-.farm-blog-button--primary {
+.farm-forum-button--primary {
   background: var(--brand-color);
   color: var(--link-color-active);
 }
 
-.farm-blog-button--primary:hover:not(:disabled) {
+.farm-forum-button--primary:hover:not(:disabled) {
   background: var(--primary-dark);
 }
 
-.farm-blog-button--secondary {
+.farm-forum-button--secondary {
   border-color: var(--border);
   background: var(--pill-bg);
   color: var(--text);
 }
 
-.farm-blog-button--secondary:hover:not(:disabled) {
+.farm-forum-button--secondary:hover:not(:disabled) {
   border-color: var(--accent-border);
   background: var(--accent-bg);
 }
 
-.farm-blog-button--danger {
+.farm-forum-button--danger {
   border-color: color-mix(in srgb, var(--danger) 45%, transparent);
   background: transparent;
   color: var(--danger);
 }
 
-.farm-blog-button--danger:hover:not(:disabled) {
+.farm-forum-button--danger:hover:not(:disabled) {
   background: color-mix(in srgb, var(--danger) 10%, var(--surface));
 }
 
-.farm-blog-upvote-note {
+.farm-forum-upvote-note {
   color: var(--muted);
   font-size: 0.84rem;
 }
 
-.farm-blog-meta {
+.farm-forum-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -295,7 +295,7 @@
   font-size: 0.86rem;
 }
 
-.farm-blog-badge {
+.farm-forum-badge {
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--pill-border);
   border-radius: 999px;
@@ -304,12 +304,12 @@
   font-weight: 650;
 }
 
-.farm-blog-reading {
+.farm-forum-reading {
   margin: 1.5rem 0;
   overflow-wrap: anywhere;
 }
 
-.farm-blog-image {
+.farm-forum-image {
   display: block;
   width: 100%;
   max-height: 36rem;
@@ -318,14 +318,14 @@
   object-fit: cover;
 }
 
-.farm-blog-video-link,
-.farm-blog-repost a {
+.farm-forum-video-link,
+.farm-forum-repost a {
   color: var(--primary);
   font-weight: 650;
   text-underline-offset: 0.2em;
 }
 
-.farm-blog-repost {
+.farm-forum-repost {
   padding: 0.8rem 1rem;
   border-left: 3px solid var(--repost);
   background: var(--accent-bg);
@@ -333,29 +333,29 @@
 }
 
 @media (max-width: 520px) {
-  .farm-blog-page {
+  .farm-forum-page {
     width: calc(100% - 1rem);
     margin-top: 1.25rem;
   }
 
-  .farm-blog-card {
+  .farm-forum-card {
     padding: 1.1rem;
     border-radius: 0.9rem;
   }
 
-  .farm-blog-card__actions {
+  .farm-forum-card__actions {
     justify-content: flex-start;
   }
 
-  .farm-blog-form__actions > .farm-blog-button {
+  .farm-forum-form__actions > .farm-forum-button {
     flex: 1 1 auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .farm-blog-field input,
-  .farm-blog-field select,
-  .farm-blog-button {
+  .farm-forum-field input,
+  .farm-forum-field select,
+  .farm-forum-button {
     transition: none;
   }
 }

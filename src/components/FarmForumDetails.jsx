@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
-import FarmBlogForm from './FarmBlogForm.jsx'
+import FarmForumForm from './FarmForumForm.jsx'
 import CommentSection from './CommentSection.jsx'
 import { deletePost, getPostById, checkAuthorOfPostSameAsOneLoggedIn } from '../utils/supabase_queries.js'
 
-const FarmBlogDetails = () => {
+const FarmForumDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [postResult, setPostResult] = useState({
@@ -50,13 +50,13 @@ const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
     if (result.error) return result
     if (!result.data) return { error: new Error('The post was not deleted.') }
 
-    navigate('/farm-blog', { replace: true })
+    navigate('/farm-forum', { replace: true })
     return { error: null }
   }
 
   if (isLoading) {
     return (
-      <main className="farm-blog-page">
+      <main className="farm-forum-page">
         <p role="status">Loading post…</p>
       </main>
     )
@@ -64,12 +64,12 @@ const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
 
   if (loadError || !post) {
     return (
-      <main className="farm-blog-page">
-        <section className="farm-blog-card">
-          <p className="farm-blog-alert" role="alert">
+      <main className="farm-forum-page">
+        <section className="farm-forum-card">
+          <p className="farm-forum-alert" role="alert">
             {loadError || 'Post not found.'}
           </p>
-          <Link className="farm-blog-button farm-blog-button--secondary" to="/farm-blog">
+          <Link className="farm-forum-button farm-forum-button--secondary" to="/farm-forum">
             Back to the feed
           </Link>
         </section>
@@ -80,7 +80,7 @@ const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
   return (
     <>
     {/* Keep comments on the post page and pass the ID so they load for this post only. */}
-    <FarmBlogForm
+    <FarmForumForm
       key={post.id}
       mode="view"
       post={post}
@@ -93,4 +93,4 @@ const isRealAuthor = await checkAuthorOfPostSameAsOneLoggedIn(id)
   )
 }
 
-export default FarmBlogDetails
+export default FarmForumDetails
