@@ -88,12 +88,12 @@ GIF created with ...
 
 ## Deployment
 
-<a href="https://hobbyhub-feiv.onrender.com/farm-forum">See site</a>
+Site was removed from public
 
 
 ## Notes
 
-<sup><sub>After completion of this project, I have restricted features of the website. I will soon delete the website.</sub></sup>
+<sup><sub>After completion of this project, I have restricted features then deleted this website.</sub></sup>
 
 ## License
 
